@@ -1,0 +1,24 @@
+.hearts {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      color: rgb(199, 29, 29);
+      z-index: 5;
+    }
+    .heart {
+      position: absolute;
+      bottom: -40px;
+      animation-name: floatUp;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      filter: drop-shadow(0 6px 10px rgba(0,0,0,.08));
+    }
+    @keyframes floatUp {
+      0%   { transform: translateY(0) translateX(0) scale(1); }
+      100% { transform: translateY(-110vh) translateX(25px) scale(1.15); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .heart { animation: none; display: none; }
+    }

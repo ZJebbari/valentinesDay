@@ -1,0 +1,158 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #fadadd, #f6b1c3);
+}
+
+.container {
+  min-height: 80vh;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 24px;
+  position: relative;
+  gap: 18px;
+  position: relative;
+}
+
+.title {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(3rem, 8vw, 6rem);
+  color: #5a1a2e;
+  margin: 0;
+  text-shadow: 0 10px 30px rgba(90, 26, 46, 0.15);
+}
+
+.timer {
+  display: grid;
+  gap: 8px;
+  place-items: center;
+}
+
+.timer h1 {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  color: #5a1a2e;
+}
+
+.countdown {
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #5a1a2e;
+}
+
+.target-time {
+  opacity: 0.85;
+  font-family: "Poppins", sans-serif;
+  color: #5a1a2e;
+}
+
+/* Play area */
+.playArea {
+  width: min(520px, 92vw);
+  height: 220px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+
+  position: relative;
+  display: grid;
+  place-items: center;
+  padding: 22px;
+}
+
+.questionRow {
+  position: absolute;
+  top: 18px;
+  left: 0;
+  right: 0;
+  display: grid;
+  place-items: center;
+}
+
+.questionText {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  color: #2c2c2c;
+  font-size: 1.35rem;
+}
+
+/* Keep YES still */
+.yesBtn {
+  position: absolute;
+  left: 50%;
+  top: 55%;
+  transform: translate(-120px, -75%);
+  color: white !important;
+  background-color: rgb(22, 170, 22) !important;
+}
+
+/* Only NO moves */
+.noBtn {
+  position: absolute;
+  left: 50%;
+  top: 55%;
+  transform: translate(40px, -75%);
+  transition: left 140ms ease, top 140ms ease;
+  user-select: none;
+  background-color: rgb(196, 27, 27) !important;
+  color: white !important;
+  border: none;
+}
+
+.message {
+  min-height: 26px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  color: #5a1a2e;
+  font-size: 2rem;
+  white-space: pre-line;
+}
+
+/* Overlay */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.22);
+  backdrop-filter: blur(6px);
+  display: grid;
+  place-items: center;
+  z-index: 9999;
+  padding: 18px;
+}
+
+.modal {
+  width: min(460px, 92vw);
+  border-radius: 22px;
+  padding: 22px 18px;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.18);
+  text-align: center;
+}
+
+.modal h2 {
+  margin: 0 0 8px;
+  font-family: "Playfair Display", serif;
+  color: #5a1a2e;
+}
+
+.modal p {
+  margin: 0 0 16px;
+  font-family: "Poppins", sans-serif;
+  color: #5a1a2e;
+  opacity: 0.9;
+}
+
+.timer h1:first-child {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 2; }
+  50% { opacity: 0.6; }
+}
