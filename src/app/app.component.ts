@@ -18,11 +18,14 @@ import { FloatingHeartsComponentComponent } from './components/floating-hearts-c
 })
 export class AppComponent implements OnDestroy {
   // ===== TIMER =====
-  private target = signal(this.getValentinesTarget(0, 0, 0));
+  private target = signal(this.getNextValentines(0, 0, 0));
   private now = signal(Date.now());
   private timerId = window.setInterval(() => this.now.set(Date.now()), 1000);
 
-  isTime = computed(() => this.now() >= this.target().getTime());
+  isValentinesDay = computed(() => {
+    const d = new Date(this.now());
+    return d.getMonth() === 1 && d.getDate() === 14; // Feb = 1
+  });
 
   remaining = computed(() => {
     const diff = Math.max(0, this.target().getTime() - this.now());
@@ -40,19 +43,12 @@ export class AppComponent implements OnDestroy {
     clearInterval(this.timerId);
   }
 
-  private getValentinesTarget(hour: number, minute: number, second: number) {
+  private getNextValentines(h: number, m: number, s: number) {
     const now = new Date();
     const year = now.getFullYear();
-
-    // Feb 14 of the current year
-    const target = new Date(year, 1, 14, hour, minute, second, 0);
-
-    // If already passed, move to next year
-    if (target.getTime() <= now.getTime()) {
-      target.setFullYear(year + 1);
-    }
-
-    return target;
+    const t = new Date(year, 1, 14, h, m, s, 0);
+    if (t.getTime() <= now.getTime()) t.setFullYear(year + 1);
+    return t;
   }
 
   countdownTitle = computed(() => {
@@ -82,11 +78,24 @@ export class AppComponent implements OnDestroy {
 
   showAreYouSure = signal(true);
   message = signal('');
-  isYes = signal(
-    localStorage.getItem('loveAnswerYear') === String(new Date().getFullYear()),
-  );
+
+  isYes = signal(this.isLoveAnswerValid());
+
+  private isLoveAnswerValid(): boolean {
+    const expiry = localStorage.getItem('loveAnswerExpiresAt');
+    if (!expiry) return false;
+
+    return Date.now() < Number(expiry);
+  }
 
   ngOnInit() {
+    const year = localStorage.getItem('loveAnswerYear');
+    const currentYear = String(new Date().getFullYear());
+
+    if (year && year !== currentYear) {
+      localStorage.removeItem('loveAnswerYear');
+    }
+
     if (this.isYes()) {
       this.onYes();
     }
@@ -100,7 +109,19 @@ export class AppComponent implements OnDestroy {
   onYes() {
     this.message.set('Awww 😍 I knew it! 💖\nHappy Valentine’s Day 💝');
     this.isYes.set(true);
-    localStorage.setItem('loveAnswerYear', String(new Date().getFullYear()));
+
+    const now = new Date();
+    const expiresAt = new Date(
+      now.getFullYear(),
+      1, // February
+      15, // Feb 15
+      0,
+      0,
+      0,
+      0,
+    ).getTime();
+
+    localStorage.setItem('loveAnswerExpiresAt', String(expiresAt));
   }
 
   // Only called from the NO button events

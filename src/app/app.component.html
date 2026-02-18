@@ -1,7 +1,7 @@
 <div class="container">
   <app-floating-hearts-component></app-floating-hearts-component>
   <h1 class="title">💘 Valentine’s Day 💘</h1>
-  @if (!isTime() && !isYes()) {
+  @if (!isValentinesDay() && !isYes()) {
     <div class="timer">
       <h1>{{ countdownTitle() }}</h1>
       <div class="countdown">{{ remaining() }}</div>
