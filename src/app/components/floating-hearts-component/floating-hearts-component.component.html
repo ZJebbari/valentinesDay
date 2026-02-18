@@ -1,12 +1,13 @@
- <div class="hearts" aria-hidden="true">
-      @for (h of hearts; track h.id) {
-        <span
-          class="heart"
-          [style.left.%]="h.left"
-          [style.fontSize.px]="h.size"
-          [style.animationDuration.s]="h.duration"
-          [style.animationDelay.s]="h.delay"
-          [style.opacity]="h.opacity"
-        >❤</span>
-      }
-    </div>
+<div class="hearts" aria-hidden="true">
+  @for (h of hearts; track h.id) {
+    <span
+      class="heart"
+      [style.left.%]="h.left"
+      [style.fontSize.px]="h.size"
+      [style.animationDuration.s]="h.duration"
+      [style.animationDelay.s]="h.delay"
+      [style.opacity]="h.opacity"
+      >❤</span
+    >
+  }
+</div>

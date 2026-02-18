@@ -1,10 +1,17 @@
 import { Component } from '@angular/core';
-type Heart = { id: number; left: number; size: number; duration: number; delay: number; opacity: number };
+type Heart = {
+  id: number;
+  left: number;
+  size: number;
+  duration: number;
+  delay: number;
+  opacity: number;
+};
 @Component({
   selector: 'app-floating-hearts-component',
   imports: [],
   templateUrl: './floating-hearts-component.component.html',
-  styleUrl: './floating-hearts-component.component.scss'
+  styleUrl: './floating-hearts-component.component.scss',
 })
 export class FloatingHeartsComponentComponent {
   hearts: Heart[] = Array.from({ length: 100 }).map((_, i) => ({

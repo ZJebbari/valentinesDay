@@ -1,15 +1,15 @@
 <div class="container">
   <app-floating-hearts-component></app-floating-hearts-component>
-    <h1 class="title">Valentine's Day</h1>
+  <h1 class="title">💘 Valentine’s Day 💘</h1>
   @if (!isTime() && !isYes()) {
     <div class="timer">
-      <h1>Almost time…</h1>
+      <h1>{{ countdownTitle() }}</h1>
       <div class="countdown">{{ remaining() }}</div>
-      <h1>Until our moment</h1>
+      <h1>Until Valentine’s Day</h1>
+
       <div class="target-time">{{ targetLabel() }}</div>
     </div>
   } @else {
-
     <!-- ONLY show overlay first -->
     @if (showAreYouSure() && !isYes()) {
       <div class="overlay" role="dialog" aria-modal="true">
@@ -26,19 +26,20 @@
 
     <!-- Show question ONLY after startGame() -->
     @if (!showAreYouSure() || isYes()) {
-      
-      @if (!isYes()){
+      @if (!isYes()) {
         <div class="playArea" #playArea>
           <div class="questionRow">
             <span class="questionText">Do you love me 💓 ?</span>
           </div>
-  
-         <button mat-raised-button class="yesBtn" (click)="onYes()">Yes</button>
+
+          <button mat-raised-button class="yesBtn" (click)="onYes()">
+            Yes
+          </button>
           <button
             class="noBtn"
             mat-stroked-button
             (mouseenter)="moveNo($event)"
-            >
+          >
             No
           </button>
         </div>

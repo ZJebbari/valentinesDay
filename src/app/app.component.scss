@@ -97,7 +97,9 @@
   left: 50%;
   top: 55%;
   transform: translate(40px, -75%);
-  transition: left 140ms ease, top 140ms ease;
+  transition:
+    left 140ms ease,
+    top 140ms ease;
   user-select: none;
   background-color: rgb(196, 27, 27) !important;
   color: white !important;
@@ -153,6 +155,11 @@
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 2; }
-  50% { opacity: 0.6; }
+  0%,
+  100% {
+    opacity: 2;
+  }
+  50% {
+    opacity: 0.6;
+  }
 }
